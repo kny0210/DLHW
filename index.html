@@ -4,7 +4,7 @@
 <head>
     <title>Nayeon English Learning App</title>
 
-    <!-- CSS: Change how the app looks -->
+    <!-- CSS: Change how the app looks (Task 4 반영) -->
     <style>
         body {
             font-family: Arial;
@@ -13,55 +13,67 @@
         }
 
         button {
-            font-size: 30px;
-            padding: 24px;
+            font-size: 26px;              /* Task 4: 20px -> 26px */
+            padding: 18px;                /* Task 4: 12px -> 18px */
             margin: 10px;
-            background-color: lightyellow;
+            background-color: lightgreen; /* Task 4: lightblue -> lightgreen */
+            cursor: pointer;
+            border-radius: 8px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- HTML: Change what learners see -->
+    <!-- HTML: Change what learners see (Task 3 반영) -->
 
-    <h1>Vocabulary Quiz</h1>
-
+    <h1>Phrasal Verb Challenge</h1>
     <p>What does "break through" mean?</p>
 
-    <button onclick="checkAnswer('participate')">
-        Participate in
+    <!-- 보기 버튼 (정답: penetrate/succeed 관련 의미 반영) -->
+    <button onclick="checkAnswer('breakthrough')">
+        Overcome or force a way through
     </button>
 
     <button onclick="checkAnswer('avoid')">
-        successed
+        Avoid completely
     </button>
 
     <button onclick="checkAnswer('watch')">
-        Watch
+        Watch quietly
     </button>
 
     <h3 id="feedback"></h3>
 
 
-    <!-- JavaScript: Change what happens -->
+    <!-- JavaScript: Change what happens (Task 6, 7 교육적 피드백 로직 반영) -->
 
     <script>
+        // Task 7: 학습자의 오답 시도 횟수를 세는 변수
+        let attempts = 0;
 
         function checkAnswer(answer) {
+            const feedback = document.getElementById("feedback");
 
-            if (answer === "participate") {
-                document.getElementById("feedback").innerText =
-                    "맞혔어";
-            }
-
+            // 정답을 선택한 경우: 긍정적 피드백
+            if (answer === "breakthrough") {
+                feedback.innerText = "정답입니다! 잘 맞혔어요! 🎉";
+            } 
+            // 오답을 선택한 경우
             else {
-                document.getElementById("feedback").innerText =
-                    "다시 하렴";
+                attempts = attempts + 1;
+
+                // 1번째 오답: 정답 미공개 + 문맥 힌트 제공
+                if (attempts === 1) {
+                    feedback.innerText = "힌트: 장애물이나 한계를 '깨고 뚫고 나아가는(돌파하는)' 느낌을 생각해보세요. 다시 도전해보세요!";
+                } 
+                // 2번째 오답: 정답 및 설명 제공
+                else {
+                    feedback.innerText = "아쉽네요! 정답은 'Overcome or force a way through'입니다. 'break through'는 벽이나 난관을 극복하고 뚫고 나아간다는 뜻입니다.";
+                }
             }
-
         }
-
     </script>
 
 </body>
